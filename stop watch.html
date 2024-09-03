@@ -1,0 +1,134 @@
+ <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>STOPWATCH</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      width: 100%;
+      height: 100vh;
+      background-image: url(' https://img.freepik.com/premium-photo/3d-illustration-round-clock-stopwatch-black-background-stopwatch-icon-logo-chronometer-vintage-timer_116124-11465.jpg');
+      background-position:topleft;
+      background-position:50% 50%;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .container {
+      padding:1.5rem;
+      max-width: 300px;
+      text-align: center;
+      position:relative;
+      border-radius: 30px;	
+      border-color:navyblue;
+      background-color:gray;
+    }
+
+    .time {
+      padding: 1rem 0;
+      font-size: 3rem;
+    }
+
+    h1,
+    p {
+      color:black;
+      font-size:50px;
+    }
+
+    button {
+      width:80px;
+      padding: 0.4rem 1rem;
+      margin: 0 0.2rem;
+      border-radius:10px;
+      border: 2px solid;
+    background-color:silver;
+    
+    }
+
+    button:hover {
+      background-color: rgba(0, 0, 0, 2);
+      color: #f8f8f8;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <h1 style="color:black">STOPWATCH</h1>
+      <p class="time">
+        <span id="minutes">00</span>:<span id="seconds">00</span>:<span
+          id="tens"
+          >00</span>
+      </p>
+      <button  id="start">START</button>
+      <button id="stop">STOP</button>
+      <button id="reset">RESET</button>
+    </div>
+  </body>
+<script>
+    window.onload = function () {
+      let minutes = 0;
+      let seconds = 0;
+      let tens = 00;
+      let appendMinutes = document.querySelector('#minutes');
+      let appendTens = document.querySelector('#tens');
+      let appendSeconds = document.querySelector('#seconds');
+      let startBtn = document.querySelector('#start');
+      let stopBtn = document.querySelector('#stop');
+      let resetBtn = document.querySelector('#reset');
+      let Interval;
+
+      const startTimer = () => {
+        tens++;
+        if (tens <= 9) {
+          appendTens.innerHTML = '0' + tens;
+        }
+        if (tens > 9) {
+          appendTens.innerHTML = tens;
+        }
+
+        if (tens > 99) {
+          seconds++;
+          appendSeconds.innerHTML = '0' + seconds;
+          tens = 0;
+          appendTens.innerHTML = '0' + 0;
+        }
+
+        if (seconds > 9) {
+          appendSeconds.innerHTML = seconds;
+        }
+
+        if (seconds > 59) {
+          minutes++;
+          appendMinutes.innerHTML = '0' + minutes;
+          seconds = 0;
+          appendSeconds.innerHTML = '0' + 0;
+        }
+      };
+
+      startBtn.onclick = () => {
+        clearInterval(Interval);
+        Interval = setInterval(startTimer, 10);
+      };
+
+      stopBtn.onclick = () => {
+        clearInterval(Interval);
+      };
+
+      resetBtn.onclick = () => {
+        clearInterval(Interval);
+        tens = '00';
+        seconds = '00';
+        minutes = '00';
+        appendTens.innerHTML = tens;
+        appendSeconds.innerHTML = seconds;
+        appendMinutes.innerHMTL = minutes;
+      };
+    };
+  </script>
+</html>
